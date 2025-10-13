@@ -14,16 +14,215 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          amount: number
+          appointment_date: string
+          created_at: string
+          department: string
+          doctor: string
+          id: string
+          patient_id: string
+          payment_method: string
+          payment_status: string
+          prescription_url: string | null
+          status: string
+          time_slot: string
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          appointment_date: string
+          created_at?: string
+          department: string
+          doctor: string
+          id?: string
+          patient_id: string
+          payment_method: string
+          payment_status?: string
+          prescription_url?: string | null
+          status?: string
+          time_slot: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          appointment_date?: string
+          created_at?: string
+          department?: string
+          doctor?: string
+          id?: string
+          patient_id?: string
+          payment_method?: string
+          payment_status?: string
+          prescription_url?: string | null
+          status?: string
+          time_slot?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      lab_bookings: {
+        Row: {
+          booking_date: string
+          created_at: string
+          id: string
+          patient_id: string
+          results_url: string | null
+          status: string
+          test_id: string
+        }
+        Insert: {
+          booking_date: string
+          created_at?: string
+          id?: string
+          patient_id: string
+          results_url?: string | null
+          status?: string
+          test_id: string
+        }
+        Update: {
+          booking_date?: string
+          created_at?: string
+          id?: string
+          patient_id?: string
+          results_url?: string | null
+          status?: string
+          test_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lab_bookings_test_id_fkey"
+            columns: ["test_id"]
+            isOneToOne: false
+            referencedRelation: "lab_tests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lab_tests: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          preparation_instructions: string | null
+          price: number
+          test_name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          preparation_instructions?: string | null
+          price: number
+          test_name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          preparation_instructions?: string | null
+          price?: number
+          test_name?: string
+        }
+        Relationships: []
+      }
+      medicines: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          price: number
+          stock: number
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          price: number
+          stock?: number
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          price?: number
+          stock?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          address: string | null
+          created_at: string
+          full_name: string
+          id: string
+          phone: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          full_name: string
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "staff" | "patient"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +349,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["staff", "patient"],
+    },
   },
 } as const
