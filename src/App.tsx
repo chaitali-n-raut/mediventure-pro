@@ -3,8 +3,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Departments from "./pages/Departments";
@@ -17,6 +20,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Pharmacy from "./pages/Pharmacy";
 import Laboratory from "./pages/Laboratory";
 import Billing from "./pages/Billing";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,27 +31,63 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/departments" element={<Departments />} />
-              <Route path="/doctors" element={<Doctors />} />
-              <Route path="/appointment" element={<Appointment />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/emergency" element={<Emergency />} />
-              <Route path="/patient-dashboard" element={<PatientDashboard />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
-              <Route path="/pharmacy" element={<Pharmacy />} />
-              <Route path="/laboratory" element={<Laboratory />} />
-              <Route path="/billing" element={<Billing />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
+        <AuthProvider>
+          <LanguageProvider>
+            <div className="flex flex-col min-h-screen">
+              <Navbar />
+              <main className="flex-1">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/departments" element={<Departments />} />
+                  <Route path="/doctors" element={<Doctors />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/emergency" element={<Emergency />} />
+                  <Route path="/auth" element={<Auth />} />
+                  
+                  {/* Protected Patient Routes */}
+                  <Route path="/appointment" element={
+                    <ProtectedRoute requireRole="patient">
+                      <Appointment />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/patient-dashboard" element={
+                    <ProtectedRoute requireRole="patient">
+                      <PatientDashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/billing" element={
+                    <ProtectedRoute requireRole="patient">
+                      <Billing />
+                    </ProtectedRoute>
+                  } />
+                  
+                  {/* Protected Staff Routes */}
+                  <Route path="/admin-dashboard" element={
+                    <ProtectedRoute requireRole="staff">
+                      <AdminDashboard />
+                    </ProtectedRoute>
+                  } />
+                  
+                  {/* Protected Routes for Both */}
+                  <Route path="/pharmacy" element={
+                    <ProtectedRoute>
+                      <Pharmacy />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/laboratory" element={
+                    <ProtectedRoute>
+                      <Laboratory />
+                    </ProtectedRoute>
+                  } />
+                  
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          </LanguageProvider>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
