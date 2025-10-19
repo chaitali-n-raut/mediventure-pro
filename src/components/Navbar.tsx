@@ -1,9 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Heart, Menu, X, Globe, LogOut, User } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import type { Language } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,10 +41,6 @@ const Navbar = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'hi' : 'en');
-  };
-
   return (
     <nav className="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4">
@@ -71,10 +69,16 @@ const Navbar = () => {
               </Link>
             ))}
             
-            <Button size="sm" variant="ghost" onClick={toggleLanguage} className="gap-2">
-              <Globe className="h-4 w-4" />
-              {language === 'en' ? 'हिन्दी' : 'English'}
-            </Button>
+            <Select value={language} onValueChange={(value: any) => setLanguage(value)}>
+              <SelectTrigger className="w-[120px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-popover">
+                <SelectItem value="en">English</SelectItem>
+                <SelectItem value="hi">हिंदी</SelectItem>
+                <SelectItem value="mr">मराठी</SelectItem>
+              </SelectContent>
+            </Select>
             
             {user ? (
               <>
@@ -124,10 +128,18 @@ const Navbar = () => {
               </Link>
             ))}
             
-            <Button size="sm" variant="ghost" onClick={toggleLanguage} className="mt-2 w-full gap-2">
-              <Globe className="h-4 w-4" />
-              {language === 'en' ? 'हिन्दी' : 'English'}
-            </Button>
+            <div className="mt-2">
+              <Select value={language} onValueChange={(value: any) => setLanguage(value)}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-popover">
+                  <SelectItem value="en">English</SelectItem>
+                  <SelectItem value="hi">हिंदी</SelectItem>
+                  <SelectItem value="mr">मराठी</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             
             {user ? (
               <>

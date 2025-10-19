@@ -10,9 +10,13 @@ import { toast } from "sonner";
 import { Calendar as CalendarIcon, Upload } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
+import PaymentDialog from "@/components/PaymentDialog";
 
 const Appointment = () => {
+  const { t } = useLanguage();
   const [date, setDate] = useState<Date>();
+  const [showPayment, setShowPayment] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,12 +36,15 @@ const Appointment = () => {
     
     if (!date || !formData.name || !formData.email || !formData.phone || 
         !formData.department || !formData.doctor || !formData.timeSlot || !formData.paymentMethod) {
-      toast.error("Please fill all required fields");
+      toast.error(t('fillAllFields'));
       return;
     }
 
-    toast.success("Appointment booked successfully! Confirmation sent to your email.");
-    
+    setShowPayment(true);
+  };
+
+  const handleClosePayment = () => {
+    setShowPayment(false);
     // Reset form
     setFormData({
       name: "",
@@ -52,25 +59,26 @@ const Appointment = () => {
   };
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="container mx-auto px-4 max-w-3xl">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Book Appointment</h1>
-          <p className="text-muted-foreground">Schedule your visit with our expert doctors</p>
-        </div>
+    <>
+      <div className="min-h-screen py-12">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold mb-4">{t('bookAppointment')}</h1>
+            <p className="text-muted-foreground">{t('heroSubtitle')}</p>
+          </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Appointment Details</CardTitle>
-          </CardHeader>
+          <Card>
+            <CardHeader>
+              <CardTitle>{t('appointmentDetails')}</CardTitle>
+            </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Personal Information */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-lg">Personal Information</h3>
+                <h3 className="font-semibold text-lg">{t('personalInfo')}</h3>
                 
                 <div>
-                  <Label htmlFor="name">Full Name *</Label>
+                  <Label htmlFor="name">{t('fullName')} *</Label>
                   <Input
                     id="name"
                     value={formData.name}
@@ -108,10 +116,10 @@ const Appointment = () => {
 
               {/* Appointment Details */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-lg">Appointment Details</h3>
+                <h3 className="font-semibold text-lg">{t('appointmentDetails')}</h3>
                 
                 <div>
-                  <Label>Select Department *</Label>
+                  <Label>{t('selectDepartment')} *</Label>
                   <Select value={formData.department} onValueChange={(value) => setFormData({...formData, department: value})}>
                     <SelectTrigger>
                       <SelectValue placeholder="Choose department" />
@@ -125,7 +133,7 @@ const Appointment = () => {
                 </div>
 
                 <div>
-                  <Label>Select Doctor *</Label>
+                  <Label>{t('selectDoctor')} *</Label>
                   <Select value={formData.doctor} onValueChange={(value) => setFormData({...formData, doctor: value})}>
                     <SelectTrigger>
                       <SelectValue placeholder="Choose doctor" />
@@ -140,7 +148,7 @@ const Appointment = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label>Select Date *</Label>
+                    <Label>{t('selectDate')} *</Label>
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
@@ -168,7 +176,7 @@ const Appointment = () => {
                   </div>
 
                   <div>
-                    <Label>Time Slot *</Label>
+                    <Label>{t('timeSlot')} *</Label>
                     <Select value={formData.timeSlot} onValueChange={(value) => setFormData({...formData, timeSlot: value})}>
                       <SelectTrigger>
                         <SelectValue placeholder="Choose time" />
@@ -198,7 +206,7 @@ const Appointment = () => {
 
               {/* Payment Method */}
               <div className="space-y-4">
-                <h3 className="font-semibold text-lg">Payment Method</h3>
+                <h3 className="font-semibold text-lg">{t('paymentMethod')}</h3>
                 <Select value={formData.paymentMethod} onValueChange={(value) => setFormData({...formData, paymentMethod: value})}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select payment method" />
@@ -213,19 +221,32 @@ const Appointment = () => {
 
               <div className="bg-secondary/30 p-4 rounded-lg">
                 <p className="text-sm text-muted-foreground">
-                  <strong>Note:</strong> Consultation fee: ₹500. You will receive a confirmation 
-                  email with appointment details and payment instructions.
+                  <strong>Note:</strong> {t('consultationFee')}: ₹500
                 </p>
               </div>
 
               <Button type="submit" className="w-full" size="lg">
-                Confirm Appointment
+                {t('confirmAppointment')}
               </Button>
             </form>
           </CardContent>
         </Card>
       </div>
     </div>
+      
+      <PaymentDialog
+        open={showPayment} 
+        onClose={handleClosePayment}
+        appointmentDetails={{
+          name: formData.name,
+          date: date ? format(date, "PPP") : "",
+          doctor: formData.doctor,
+          department: formData.department,
+          timeSlot: formData.timeSlot,
+          paymentMethod: formData.paymentMethod
+        }}
+      />
+    </>
   );
 };
 
