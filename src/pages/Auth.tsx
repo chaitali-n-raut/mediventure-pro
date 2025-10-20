@@ -58,10 +58,17 @@ const Auth = () => {
   const handleDoctorSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await signUp(doctorEmail, doctorPassword, `Dr. ${doctorName}`, doctorPhone);
+    const { error } = await signUp(
+      doctorEmail, 
+      doctorPassword, 
+      `Dr. ${doctorName}`, 
+      doctorPhone,
+      'doctor',
+      { specialization, licenseNumber }
+    );
     if (!error) {
       toast.success(t('signupSuccess'));
-      navigate('/');
+      navigate('/doctor-dashboard');
     } else {
       toast.error(error.message || 'Signup failed');
     }

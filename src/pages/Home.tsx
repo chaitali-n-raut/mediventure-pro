@@ -2,45 +2,48 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Users, Award, Phone, Calendar, CreditCard, Heart, Stethoscope, Activity } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import heroImage from "@/assets/hero-hospital.jpg";
 import doctorsTeam from "@/assets/doctors-team.jpg";
 
 const Home = () => {
+  const { t } = useLanguage();
+  
   const features = [
     {
       icon: Clock,
-      title: "24/7 Service",
-      description: "Round-the-clock emergency care and medical support"
+      title: t('service247'),
+      description: t('service247Desc')
     },
     {
       icon: Users,
-      title: "Expert Doctors",
-      description: "Highly qualified and experienced medical professionals"
+      title: t('expertDoctors'),
+      description: t('expertDoctorsDesc')
     },
     {
       icon: Award,
-      title: "Modern Labs",
-      description: "State-of-the-art diagnostic and testing facilities"
+      title: t('modernLabs'),
+      description: t('modernLabsDesc')
     }
   ];
 
   const quickLinks = [
     {
       icon: Phone,
-      title: "Emergency Numbers",
-      description: "Call us anytime",
+      title: t('emergencyNumbers'),
+      description: t('callUsAnytime'),
       link: "/emergency"
     },
     {
       icon: Calendar,
-      title: "Find Doctor",
-      description: "Book your appointment",
+      title: t('findDoctor'),
+      description: t('bookYourAppointment'),
       link: "/doctors"
     },
     {
       icon: CreditCard,
-      title: "Pay Bill",
-      description: "Quick payment options",
+      title: t('payBill'),
+      description: t('quickPayment'),
       link: "/billing"
     }
   ];
@@ -77,23 +80,22 @@ const Home = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl">
             <h1 className="text-5xl md:text-6xl font-bold mb-4 text-foreground">
-              Your Health, <span className="text-primary">Our Priority</span>
+              {t('heroTitle').split(',')[0]}, <span className="text-primary">{t('heroTitle').split(',')[1]}</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Experience world-class healthcare with compassion and cutting-edge technology. 
-              We're here for you 24/7.
+              {t('heroSubtitle')}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/appointment">
                 <Button size="lg" className="shadow-lg hover:shadow-xl">
                   <Calendar className="mr-2 h-5 w-5" />
-                  Book Appointment Now
+                  {t('bookNow')}
                 </Button>
               </Link>
               <Link to="/emergency">
                 <Button size="lg" variant="outline" className="shadow-lg">
                   <Phone className="mr-2 h-5 w-5" />
-                  Emergency: +1 (234) 567-890
+                  {t('emergencyCall')}: +1 (234) 567-890
                 </Button>
               </Link>
             </div>
@@ -124,8 +126,8 @@ const Home = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Quick Access</h2>
-            <p className="text-muted-foreground">Everything you need at your fingertips</p>
+            <h2 className="text-3xl font-bold mb-4">{t('quickAccess')}</h2>
+            <p className="text-muted-foreground">{t('quickAccessDesc')}</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -151,11 +153,9 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-4">Why Choose SmartCare?</h2>
+              <h2 className="text-3xl font-bold mb-4">{t('whyChooseSmartCare')}</h2>
               <p className="text-muted-foreground mb-6">
-                With over 20 years of excellence in healthcare, SmartCare Hospital combines 
-                advanced medical technology with compassionate care. Our team of expert doctors 
-                and state-of-the-art facilities ensure you receive the best treatment possible.
+                {t('whyChooseDesc')}
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -163,8 +163,8 @@ const Home = () => {
                     <Stethoscope className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Experienced Medical Team</h4>
-                    <p className="text-sm text-muted-foreground">Board-certified doctors with years of expertise</p>
+                    <h4 className="font-semibold">{t('experiencedTeam')}</h4>
+                    <p className="text-sm text-muted-foreground">{t('experiencedTeamDesc')}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -172,8 +172,8 @@ const Home = () => {
                     <Activity className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Advanced Technology</h4>
-                    <p className="text-sm text-muted-foreground">Latest medical equipment and diagnostic tools</p>
+                    <h4 className="font-semibold">{t('advancedTech')}</h4>
+                    <p className="text-sm text-muted-foreground">{t('advancedTechDesc')}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -181,13 +181,13 @@ const Home = () => {
                     <Heart className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Patient-Centered Care</h4>
-                    <p className="text-sm text-muted-foreground">Your comfort and recovery are our top priorities</p>
+                    <h4 className="font-semibold">{t('patientCare')}</h4>
+                    <p className="text-sm text-muted-foreground">{t('patientCareDesc')}</p>
                   </div>
                 </div>
               </div>
               <Link to="/about">
-                <Button variant="outline" className="mt-6">Learn More About Us</Button>
+                <Button variant="outline" className="mt-6">{t('learnMore')}</Button>
               </Link>
             </div>
             <div>
@@ -205,8 +205,8 @@ const Home = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">What Our Patients Say</h2>
-            <p className="text-muted-foreground">Real experiences from real people</p>
+            <h2 className="text-3xl font-bold mb-4">{t('whatPatientsSay')}</h2>
+            <p className="text-muted-foreground">{t('realExperiences')}</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -230,11 +230,11 @@ const Home = () => {
       {/* CTA Section */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Take Care of Your Health?</h2>
-          <p className="text-lg mb-8 opacity-90">Book an appointment today and experience quality healthcare</p>
+          <h2 className="text-3xl font-bold mb-4">{t('readyForHealth')}</h2>
+          <p className="text-lg mb-8 opacity-90">{t('bookTodayDesc')}</p>
           <Link to="/appointment">
             <Button size="lg" variant="secondary" className="shadow-lg">
-              Schedule Your Visit
+              {t('scheduleVisit')}
             </Button>
           </Link>
         </div>

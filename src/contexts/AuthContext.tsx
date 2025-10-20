@@ -6,9 +6,9 @@ import { useToast } from '@/hooks/use-toast';
 interface AuthContextType {
   user: User | null;
   session: Session | null;
-  userRole: 'staff' | 'patient' | null;
+  userRole: 'staff' | 'patient' | 'doctor' | null;
   loading: boolean;
-  signUp: (email: string, password: string, fullName: string, phone: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, fullName: string, phone: string, role?: string, additionalData?: any) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
@@ -18,7 +18,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const [userRole, setUserRole] = useState<'staff' | 'patient' | null>(null);
+  const [userRole, setUserRole] = useState<'staff' | 'patient' | 'doctor' | null>(null);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
@@ -71,10 +71,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string, fullName: string, phone: string) => {
+  const signUp = async (email: string, password: string, fullName: string, phone: string, role: string = 'patient', additionalData: any = {}) => {
     const redirectUrl = `${window.location.origin}/`;
     
-    const { error } = await supabase.auth.signUp({
+    const { data: authData, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -82,6 +82,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         data: {
           full_name: fullName,
           phone: phone,
+          role: role,
+          ...additionalData,
         },
       },
     });
@@ -92,12 +94,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         description: error.message,
         variant: 'destructive',
       });
-    } else {
-      toast({
-        title: 'Success',
-        description: 'Account created successfully!',
-      });
+      return { error };
     }
+    
+    // If doctor role, create doctor record
+    if (role === 'doctor' && authData.user && additionalData.specialization && additionalData.licenseNumber) {
+      try {
+        // First, insert into user_roles
+        await supabase
+          .from('user_roles')
+          .insert({
+            user_id: authData.user.id,
+            role: 'doctor'
+          });
+        
+        // Then, insert into doctors table
+        const { error: doctorError } = await supabase
+          .from('doctors')
+          .insert({
+            user_id: authData.user.id,
+            specialization: additionalData.specialization,
+            license_number: additionalData.licenseNumber
+          });
+        
+        if (doctorError) {
+          console.error('Error creating doctor record:', doctorError);
+        }
+      } catch (err) {
+        console.error('Error in doctor signup process:', err);
+      }
+    }
+    
+    toast({
+      title: 'Success',
+      description: 'Account created successfully!',
+    });
     
     return { error };
   };

@@ -29,15 +29,25 @@ const Navbar = () => {
     { name: t('billing'), path: "/billing" },
   ];
 
+  const doctorNavLinks = [
+    { name: t('doctorDashboard'), path: "/doctor-dashboard" },
+    { name: t('myAppointments'), path: "/doctor-dashboard" },
+  ];
+
   const staffNavLinks = [
     { name: t('adminDashboard'), path: "/admin-dashboard" },
     { name: t('pharmacy'), path: "/pharmacy" },
     { name: t('laboratory'), path: "/laboratory" },
   ];
 
-  const navLinks = user 
-    ? (userRole === 'staff' ? [...publicNavLinks, ...staffNavLinks] : [...publicNavLinks, ...patientNavLinks])
-    : publicNavLinks;
+  const getNavLinks = () => {
+    if (!user) return publicNavLinks;
+    if (userRole === 'staff') return [...publicNavLinks, ...staffNavLinks];
+    if (userRole === 'doctor') return [...publicNavLinks, ...doctorNavLinks];
+    return [...publicNavLinks, ...patientNavLinks];
+  };
+
+  const navLinks = getNavLinks();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -56,12 +66,12 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-6 overflow-x-auto">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-sm font-medium transition-colors hover:text-primary whitespace-nowrap ${
                   isActive(link.path) ? "text-primary" : "text-muted-foreground"
                 }`}
               >
@@ -104,7 +114,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="lg:hidden p-2"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -114,7 +124,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div className="lg:hidden py-4 border-t border-border">
             {navLinks.map((link) => (
               <Link
                 key={link.path}

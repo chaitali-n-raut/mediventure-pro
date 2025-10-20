@@ -16,6 +16,7 @@ import Appointment from "./pages/Appointment";
 import Contact from "./pages/Contact";
 import Emergency from "./pages/Emergency";
 import PatientDashboard from "./pages/PatientDashboard";
+import DoctorDashboard from "./pages/DoctorDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Pharmacy from "./pages/Pharmacy";
 import Laboratory from "./pages/Laboratory";
@@ -59,6 +60,13 @@ const App = () => (
                   <Route path="/billing" element={
                     <ProtectedRoute requireRole="patient">
                       <Billing />
+                    </ProtectedRoute>
+                  } />
+                  
+                  {/* Protected Doctor Routes */}
+                  <Route path="/doctor-dashboard" element={
+                    <ProtectedRoute requireRole="doctor">
+                      <DoctorDashboard />
                     </ProtectedRoute>
                   } />
                   
