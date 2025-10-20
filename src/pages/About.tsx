@@ -1,13 +1,16 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Users, Building2, Heart } from "lucide-react";
 import doctorsTeam from "@/assets/doctors-team.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
+  const { t } = useLanguage();
+  
   const achievements = [
-    { icon: Award, title: "20+ Years", description: "Of Healthcare Excellence" },
-    { icon: Users, title: "50+ Doctors", description: "Expert Medical Professionals" },
-    { icon: Building2, title: "10 Departments", description: "Specialized Care Units" },
-    { icon: Heart, title: "50,000+", description: "Happy Patients Served" }
+    { icon: Award, title: t('yearsExperience'), description: t('healthcareExcellence') },
+    { icon: Users, title: t('expertDoctorsCount'), description: t('medicalProfessionals') },
+    { icon: Building2, title: t('specializedDepartments'), description: t('specializedCareUnits') },
+    { icon: Heart, title: t('happyPatients'), description: t('patientsServed') }
   ];
 
   return (
@@ -15,9 +18,9 @@ const About = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">About SmartCare Hospital</h1>
+          <h1 className="text-4xl font-bold mb-4">{t('aboutTitle')}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Where compassionate care meets cutting-edge medical technology
+            {t('aboutSubtitle')}
           </p>
         </div>
 
@@ -25,7 +28,7 @@ const About = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <Card className="border border-border">
             <CardContent className="pt-6">
-              <h2 className="text-2xl font-bold mb-4 text-primary">Our Vision</h2>
+              <h2 className="text-2xl font-bold mb-4 text-primary">{t('ourVision')}</h2>
               <p className="text-muted-foreground">
                 To be the leading healthcare provider in the region, recognized for excellence 
                 in patient care, medical innovation, and compassionate service. We envision a 
@@ -36,7 +39,7 @@ const About = () => {
 
           <Card className="border border-border">
             <CardContent className="pt-6">
-              <h2 className="text-2xl font-bold mb-4 text-primary">Our Mission</h2>
+              <h2 className="text-2xl font-bold mb-4 text-primary">{t('ourMission')}</h2>
               <p className="text-muted-foreground">
                 To provide comprehensive, patient-centered healthcare services with integrity, 
                 respect, and excellence. We are committed to improving the health and well-being 
@@ -48,7 +51,7 @@ const About = () => {
 
         {/* Achievements */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-8">Our Achievements</h2>
+          <h2 className="text-3xl font-bold text-center mb-8">{t('ourAchievements')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {achievements.map((item, index) => (
               <Card key={index} className="border border-border text-center hover:shadow-lg transition-shadow">
@@ -74,7 +77,7 @@ const About = () => {
             />
           </div>
           <div>
-            <h2 className="text-3xl font-bold mb-4">Director's Message</h2>
+            <h2 className="text-3xl font-bold mb-4">{t('directorsMessage')}</h2>
             <p className="text-muted-foreground mb-4">
               Welcome to SmartCare Hospital. For over two decades, we have been at the forefront 
               of healthcare excellence, combining advanced medical technology with compassionate, 
@@ -100,7 +103,7 @@ const About = () => {
 
         {/* Certifications */}
         <div className="bg-secondary/30 rounded-lg p-8">
-          <h2 className="text-3xl font-bold text-center mb-8">Certifications & Accreditations</h2>
+          <h2 className="text-3xl font-bold text-center mb-8">{t('certificationsTitle')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
               <div className="bg-card w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">

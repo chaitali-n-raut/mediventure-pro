@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Award, Calendar, Search } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Doctors = () => {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterDept, setFilterDept] = useState("all");
 
@@ -69,9 +71,9 @@ const Doctors = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Our Medical Experts</h1>
+          <h1 className="text-4xl font-bold mb-4">{t('ourMedicalExperts')}</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Meet our team of highly qualified and experienced doctors dedicated to your health
+            {t('medicalExpertsSubtitle')}
           </p>
         </div>
 
@@ -80,7 +82,7 @@ const Doctors = () => {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search by name or specialization..."
+              placeholder={t('searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -88,12 +90,12 @@ const Doctors = () => {
           </div>
           <Select value={filterDept} onValueChange={setFilterDept}>
             <SelectTrigger className="w-full md:w-64">
-              <SelectValue placeholder="Filter by department" />
+              <SelectValue placeholder={t('filterByDepartment')} />
             </SelectTrigger>
             <SelectContent className="bg-popover z-50">
               {departments.map((dept) => (
                 <SelectItem key={dept} value={dept}>
-                  {dept === "all" ? "All Departments" : dept}
+                  {dept === "all" ? t('allDepartments') : dept}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -116,7 +118,7 @@ const Doctors = () => {
                   <p className="text-sm text-muted-foreground mb-3">{doctor.department}</p>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Award className="h-4 w-4 text-accent" />
-                    <span>{doctor.experience} experience</span>
+                    <span>{doctor.experience} {t('experience')}</span>
                   </div>
                 </div>
               </CardContent>
@@ -124,7 +126,7 @@ const Doctors = () => {
                 <Link to="/appointment" className="w-full">
                   <Button className="w-full">
                     <Calendar className="mr-2 h-4 w-4" />
-                    Book Appointment
+                    {t('bookAppointment')}
                   </Button>
                 </Link>
               </CardFooter>
@@ -134,7 +136,7 @@ const Doctors = () => {
 
         {filteredDoctors.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">No doctors found matching your criteria.</p>
+            <p className="text-muted-foreground">{t('noDoctorsFound')}</p>
           </div>
         )}
       </div>

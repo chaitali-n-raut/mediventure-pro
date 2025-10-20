@@ -13,66 +13,69 @@ import {
   Building2,
   Pill
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Departments = () => {
+  const { t } = useLanguage();
+  
   const departments = [
     {
       icon: Heart,
-      name: "General Medicine",
+      name: t('generalMedicine'),
       description: "Comprehensive care for common health conditions and preventive medicine",
       color: "text-red-500"
     },
     {
       icon: Baby,
-      name: "Pediatrics",
+      name: t('pediatrics'),
       description: "Specialized healthcare for infants, children, and adolescents",
       color: "text-pink-500"
     },
     {
       icon: Users,
-      name: "Gynecology & Obstetrics",
+      name: t('gynecology'),
       description: "Women's health, pregnancy care, and reproductive services",
       color: "text-purple-500"
     },
     {
       icon: Eye,
-      name: "Ophthalmology",
+      name: t('ophthalmology'),
       description: "Complete eye care including vision tests and eye surgery",
       color: "text-blue-500"
     },
     {
       icon: Activity,
-      name: "Surgery",
+      name: t('surgery'),
       description: "Advanced surgical procedures with expert surgeons",
       color: "text-orange-500"
     },
     {
       icon: Dumbbell,
-      name: "Physiotherapy",
+      name: t('physiotherapy'),
       description: "Rehabilitation and physical therapy for recovery",
       color: "text-green-500"
     },
     {
       icon: Sparkles,
-      name: "Dermatology",
+      name: t('dermatology'),
       description: "Skin care, treatment of skin conditions and cosmetic procedures",
       color: "text-yellow-500"
     },
     {
       icon: TestTube,
-      name: "Laboratory",
+      name: t('laboratory'),
       description: "Comprehensive diagnostic tests and pathology services",
       color: "text-cyan-500"
     },
     {
       icon: Building2,
-      name: "Operation Theatres",
+      name: t('operationTheatres'),
       description: "State-of-the-art surgical facilities with modern equipment",
       color: "text-indigo-500"
     },
     {
       icon: Pill,
-      name: "Pharmacy",
+      name: t('pharmacy'),
       description: "24/7 pharmacy with all essential medications and supplies",
       color: "text-teal-500"
     }
@@ -83,10 +86,9 @@ const Departments = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Our Departments</h1>
+          <h1 className="text-4xl font-bold mb-4">{t('ourDepartments')}</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive healthcare services across multiple specialties, 
-            all under one roof for your convenience
+            {t('departmentsSubtitle')}
           </p>
         </div>
 
@@ -107,12 +109,12 @@ const Departments = () => {
               <CardFooter className="flex gap-2">
                 <Link to="/doctors" className="flex-1">
                   <Button variant="outline" size="sm" className="w-full">
-                    View Doctors
+                    {t('viewDoctors')}
                   </Button>
                 </Link>
                 <Link to="/appointment" className="flex-1">
                   <Button size="sm" className="w-full">
-                    Book Appointment
+                    {t('bookAppointment')}
                   </Button>
                 </Link>
               </CardFooter>
@@ -125,15 +127,15 @@ const Departments = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
               <h3 className="text-3xl font-bold text-primary mb-2">10+</h3>
-              <p className="text-muted-foreground">Specialized Departments</p>
+              <p className="text-muted-foreground">{t('specializedDepartments')}</p>
             </div>
             <div>
               <h3 className="text-3xl font-bold text-primary mb-2">50+</h3>
-              <p className="text-muted-foreground">Expert Doctors</p>
+              <p className="text-muted-foreground">{t('expertDoctors')}</p>
             </div>
             <div>
               <h3 className="text-3xl font-bold text-primary mb-2">24/7</h3>
-              <p className="text-muted-foreground">Emergency Services</p>
+              <p className="text-muted-foreground">{t('emergencyServices')}</p>
             </div>
           </div>
         </div>

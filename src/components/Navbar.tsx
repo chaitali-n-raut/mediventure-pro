@@ -1,11 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Heart, Menu, X, Globe, LogOut, User } from "lucide-react";
+import { Heart, Menu, X, LogOut, User } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import type { Language } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +30,8 @@ const Navbar = () => {
 
   const doctorNavLinks = [
     { name: t('doctorDashboard'), path: "/doctor-dashboard" },
-    { name: t('myAppointments'), path: "/doctor-dashboard" },
+    { name: t('monthlyAppointments'), path: "/appointment" },
+    { name: t('myPatients'), path: "/doctors" },
   ];
 
   const staffNavLinks = [
@@ -42,9 +42,9 @@ const Navbar = () => {
 
   const getNavLinks = () => {
     if (!user) return publicNavLinks;
-    if (userRole === 'staff') return [...publicNavLinks, ...staffNavLinks];
-    if (userRole === 'doctor') return [...publicNavLinks, ...doctorNavLinks];
-    return [...publicNavLinks, ...patientNavLinks];
+    if (userRole === 'staff') return staffNavLinks;
+    if (userRole === 'doctor') return doctorNavLinks;
+    return patientNavLinks;
   };
 
   const navLinks = getNavLinks();
@@ -66,12 +66,12 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-4 xl:gap-6 overflow-x-auto">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-4 overflow-x-auto flex-1 max-w-4xl">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-primary whitespace-nowrap ${
+                className={`text-xs xl:text-sm font-medium transition-colors hover:text-primary whitespace-nowrap ${
                   isActive(link.path) ? "text-primary" : "text-muted-foreground"
                 }`}
               >
@@ -80,7 +80,7 @@ const Navbar = () => {
             ))}
             
             <Select value={language} onValueChange={(value: any) => setLanguage(value)}>
-              <SelectTrigger className="w-[120px]">
+              <SelectTrigger className="w-[90px] xl:w-[110px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-popover">
