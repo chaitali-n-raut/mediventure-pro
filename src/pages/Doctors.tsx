@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,65 +6,66 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Award, Calendar, Search } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Doctors = () => {
   const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterDept, setFilterDept] = useState("all");
+  const [doctors, setDoctors] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const doctors = [
-    {
-      name: "Dr. Sarah Johnson",
-      specialization: "Cardiologist",
-      department: "General Medicine",
-      experience: "15 years",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop"
-    },
-    {
-      name: "Dr. Michael Chen",
-      specialization: "Pediatrician",
-      department: "Pediatrics",
-      experience: "12 years",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop"
-    },
-    {
-      name: "Dr. Emily Davis",
-      specialization: "Gynecologist",
-      department: "Gynecology & Obstetrics",
-      experience: "18 years",
-      image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&h=400&fit=crop"
-    },
-    {
-      name: "Dr. Robert Williams",
-      specialization: "Orthopedic Surgeon",
-      department: "Surgery",
-      experience: "20 years",
-      image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=400&fit=crop"
-    },
-    {
-      name: "Dr. Lisa Anderson",
-      specialization: "Dermatologist",
-      department: "Dermatology",
-      experience: "10 years",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop"
-    },
-    {
-      name: "Dr. James Martinez",
-      specialization: "Ophthalmologist",
-      department: "Ophthalmology",
-      experience: "14 years",
-      image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=400&fit=crop"
+  useEffect(() => {
+    fetchDoctors();
+  }, []);
+
+  const fetchDoctors = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('doctors')
+        .select(`
+          id,
+          specialization,
+          license_number,
+          profiles!inner(full_name)
+        `);
+
+      if (error) throw error;
+
+      const formattedDoctors = data?.map((doctor: any) => ({
+        id: doctor.id,
+        name: doctor.profiles?.full_name || 'Doctor',
+        specialization: doctor.specialization,
+        licenseNumber: doctor.license_number,
+        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop"
+      })) || [];
+
+      setDoctors(formattedDoctors);
+    } catch (error: any) {
+      console.error('Error fetching doctors:', error);
+      toast.error(t('errorFetchingDoctors') || 'Error fetching doctors');
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
-  const departments = ["all", "General Medicine", "Pediatrics", "Gynecology & Obstetrics", "Surgery", "Dermatology", "Ophthalmology"];
+  const departments = ["all", "Cardiologist", "Pediatrician", "Gynecologist", "Orthopedic Surgeon", "Dermatologist", "Ophthalmologist"];
 
   const filteredDoctors = doctors.filter(doctor => {
     const matchesSearch = doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          doctor.specialization.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesDept = filterDept === "all" || doctor.department === filterDept;
+    const matchesDept = filterDept === "all" || doctor.specialization === filterDept;
     return matchesSearch && matchesDept;
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen py-12">
@@ -115,10 +116,9 @@ const Doctors = () => {
                   />
                   <h3 className="text-xl font-semibold mb-1">{doctor.name}</h3>
                   <p className="text-primary font-medium mb-2">{doctor.specialization}</p>
-                  <p className="text-sm text-muted-foreground mb-3">{doctor.department}</p>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Award className="h-4 w-4 text-accent" />
-                    <span>{doctor.experience} {t('experience')}</span>
+                    <span>{t('licenseNumber')}: {doctor.licenseNumber}</span>
                   </div>
                 </div>
               </CardContent>

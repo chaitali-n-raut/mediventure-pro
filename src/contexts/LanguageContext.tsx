@@ -112,6 +112,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     filterByDepartment: { en: 'Filter by department', hi: 'विभाग द्वारा फ़िल्टर करें', mr: 'विभागानुसार फिल्टर करा' },
     allDepartments: { en: 'All Departments', hi: 'सभी विभाग', mr: 'सर्व विभाग' },
     noDoctorsFound: { en: 'No doctors found matching your criteria.', hi: 'आपके मानदंडों से मेल खाने वाला कोई डॉक्टर नहीं मिला।', mr: 'तुमच्या निकषांशी जुळणारे कोणतेही डॉक्टर आढळले नाहीत.' },
+    errorFetchingDoctors: { en: 'Error fetching doctors', hi: 'डॉक्टर प्राप्त करने में त्रुटि', mr: 'डॉक्टर मिळवताना त्रुटी' },
     
     // Emergency Page
     emergencyServices: { en: 'Emergency Services', hi: 'आपातकालीन सेवाएं', mr: 'आणीबाणी सेवा' },
