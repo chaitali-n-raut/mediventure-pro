@@ -26,20 +26,32 @@ const Doctors = () => {
         .from('doctors')
         .select(`
           id,
+          user_id,
           specialization,
-          license_number,
-          profiles!inner(full_name)
+          license_number
         `);
 
       if (error) throw error;
 
-      const formattedDoctors = data?.map((doctor: any) => ({
-        id: doctor.id,
-        name: doctor.profiles?.full_name || 'Doctor',
-        specialization: doctor.specialization,
-        licenseNumber: doctor.license_number,
-        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop"
-      })) || [];
+      // Fetch profiles for all doctors
+      const userIds = data?.map(d => d.user_id) || [];
+      const { data: profiles } = await supabase
+        .from('profiles')
+        .select('user_id, full_name, avatar_url')
+        .in('user_id', userIds);
+
+      const profileMap = new Map(profiles?.map(p => [p.user_id, p]) || []);
+
+      const formattedDoctors = data?.map((doctor: any) => {
+        const profile = profileMap.get(doctor.user_id);
+        return {
+          id: doctor.id,
+          name: profile?.full_name || 'Doctor',
+          specialization: doctor.specialization,
+          licenseNumber: doctor.license_number,
+          image: profile?.avatar_url || "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop"
+        };
+      }) || [];
 
       setDoctors(formattedDoctors);
     } catch (error: any) {

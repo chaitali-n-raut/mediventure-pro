@@ -28,6 +28,7 @@ const Auth = () => {
   const [doctorPhone, setDoctorPhone] = useState('');
   const [specialization, setSpecialization] = useState('');
   const [licenseNumber, setLicenseNumber] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,7 +65,7 @@ const Auth = () => {
       `Dr. ${doctorName}`, 
       doctorPhone,
       'doctor',
-      { specialization, licenseNumber }
+      { specialization, licenseNumber, avatarUrl }
     );
     if (!error) {
       toast.success(t('signupSuccess'));
@@ -148,6 +149,16 @@ const Auth = () => {
                 <div className="space-y-2">
                   <Label htmlFor="license">{t('licenseNumber')}</Label>
                   <Input id="license" type="text" value={licenseNumber} onChange={(e) => setLicenseNumber(e.target.value)} required />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="avatar-url">{t('profileImageUrl')} ({t('optional')})</Label>
+                  <Input 
+                    id="avatar-url" 
+                    type="url" 
+                    value={avatarUrl} 
+                    onChange={(e) => setAvatarUrl(e.target.value)}
+                    placeholder="https://example.com/your-photo.jpg"
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="doctor-phone">{t('phone')}</Label>

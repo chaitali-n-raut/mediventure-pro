@@ -44,6 +44,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     doctor: { en: 'Doctor', hi: 'डॉक्टर', mr: 'डॉक्टर' },
     specialization: { en: 'Specialization', hi: 'विशेषज्ञता', mr: 'विशेषज्ञता' },
     licenseNumber: { en: 'License Number', hi: 'लाइसेंस नंबर', mr: 'परवाना क्रमांक' },
+    profileImageUrl: { en: 'Profile Image URL', hi: 'प्रोफाइल छवि URL', mr: 'प्रोफाइल प्रतिमा URL' },
+    optional: { en: 'Optional', hi: 'वैकल्पिक', mr: 'पर्यायी' },
     consultationFee: { en: 'Consultation Fee', hi: 'परामर्श शुल्क', mr: 'सल्लामसलत शुल्क' },
     
     // Common

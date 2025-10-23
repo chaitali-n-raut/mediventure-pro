@@ -100,7 +100,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // If doctor role, create doctor record
     if (role === 'doctor' && authData.user && additionalData.specialization && additionalData.licenseNumber) {
       try {
-        // First, insert into user_roles
+        // First, update profile with avatar_url if provided
+        if (additionalData.avatarUrl) {
+          await supabase
+            .from('profiles')
+            .update({ avatar_url: additionalData.avatarUrl })
+            .eq('user_id', authData.user.id);
+        }
+        
+        // Insert into user_roles
         await supabase
           .from('user_roles')
           .insert({
