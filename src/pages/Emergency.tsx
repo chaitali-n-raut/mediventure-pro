@@ -1,12 +1,15 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Phone, Ambulance, AlertCircle, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Emergency = () => {
+  const { t } = useLanguage();
+  
   const emergencyContacts = [
-    { title: "Emergency Hotline", number: "+1 (234) 567-999", description: "24/7 Emergency Care" },
-    { title: "Ambulance Service", number: "+1 (234) 567-911", description: "Quick Response Team" },
-    { title: "Trauma Center", number: "+1 (234) 567-888", description: "Critical Care Unit" }
+    { title: t('emergencyHotline'), number: "+1 (234) 567-999", description: t('emergencyCareDesc') },
+    { title: t('ambulanceService'), number: "+1 (234) 567-911", description: t('quickResponseTeam') },
+    { title: t('traumaCenter'), number: "+1 (234) 567-888", description: t('criticalCareUnit') }
   ];
 
   const nearbyHospitals = [
@@ -23,8 +26,8 @@ const Emergency = () => {
           <div className="flex items-center gap-3">
             <AlertCircle className="h-8 w-8" />
             <div>
-              <h2 className="text-2xl font-bold mb-1">Emergency Services</h2>
-              <p className="text-sm">In case of medical emergency, call immediately or visit our emergency department</p>
+              <h2 className="text-2xl font-bold mb-1">{t('emergencyServices')}</h2>
+              <p className="text-sm">{t('inCaseOfEmergency')}</p>
             </div>
           </div>
         </div>

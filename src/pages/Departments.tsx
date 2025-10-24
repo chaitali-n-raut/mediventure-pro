@@ -22,61 +22,61 @@ const Departments = () => {
     {
       icon: Heart,
       name: t('generalMedicine'),
-      description: "Comprehensive care for common health conditions and preventive medicine",
+      description: t('generalMedicineDesc'),
       color: "text-red-500"
     },
     {
       icon: Baby,
       name: t('pediatrics'),
-      description: "Specialized healthcare for infants, children, and adolescents",
+      description: t('pediatricsDesc'),
       color: "text-pink-500"
     },
     {
       icon: Users,
       name: t('gynecology'),
-      description: "Women's health, pregnancy care, and reproductive services",
+      description: t('gynecologyDesc'),
       color: "text-purple-500"
     },
     {
       icon: Eye,
       name: t('ophthalmology'),
-      description: "Complete eye care including vision tests and eye surgery",
+      description: t('ophthalmologyDesc'),
       color: "text-blue-500"
     },
     {
       icon: Activity,
       name: t('surgery'),
-      description: "Advanced surgical procedures with expert surgeons",
+      description: t('surgeryDesc'),
       color: "text-orange-500"
     },
     {
       icon: Dumbbell,
       name: t('physiotherapy'),
-      description: "Rehabilitation and physical therapy for recovery",
+      description: t('physiotherapyDesc'),
       color: "text-green-500"
     },
     {
       icon: Sparkles,
       name: t('dermatology'),
-      description: "Skin care, treatment of skin conditions and cosmetic procedures",
+      description: t('dermatologyDesc'),
       color: "text-yellow-500"
     },
     {
       icon: TestTube,
       name: t('laboratory'),
-      description: "Comprehensive diagnostic tests and pathology services",
+      description: t('laboratoryDesc'),
       color: "text-cyan-500"
     },
     {
       icon: Building2,
       name: t('operationTheatres'),
-      description: "State-of-the-art surgical facilities with modern equipment",
+      description: t('operationTheatresDesc'),
       color: "text-indigo-500"
     },
     {
       icon: Pill,
       name: t('pharmacy'),
-      description: "24/7 pharmacy with all essential medications and supplies",
+      description: t('pharmacyDesc'),
       color: "text-teal-500"
     }
   ];

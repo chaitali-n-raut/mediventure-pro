@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { Heart, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+  
   return (
     <footer className="bg-card border-t border-border mt-auto">
       <div className="container mx-auto px-4 py-12">
@@ -15,7 +18,7 @@ const Footer = () => {
               <span className="font-bold text-lg">SmartCare</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
-              Caring With Technology. Providing world-class healthcare services with compassion and excellence.
+              {t('caringWithTechnology')}
             </p>
             <div className="flex gap-3">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -35,29 +38,29 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
+            <h3 className="font-semibold mb-4">{t('quickLinks')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link to="/departments" className="text-muted-foreground hover:text-primary transition-colors">Departments</Link></li>
-              <li><Link to="/doctors" className="text-muted-foreground hover:text-primary transition-colors">Our Doctors</Link></li>
-              <li><Link to="/appointment" className="text-muted-foreground hover:text-primary transition-colors">Book Appointment</Link></li>
+              <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">{t('aboutUs')}</Link></li>
+              <li><Link to="/departments" className="text-muted-foreground hover:text-primary transition-colors">{t('departments')}</Link></li>
+              <li><Link to="/doctors" className="text-muted-foreground hover:text-primary transition-colors">{t('ourDoctors')}</Link></li>
+              <li><Link to="/appointment" className="text-muted-foreground hover:text-primary transition-colors">{t('bookAppointment')}</Link></li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="font-semibold mb-4">Services</h3>
+            <h3 className="font-semibold mb-4">{t('services')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/pharmacy" className="text-muted-foreground hover:text-primary transition-colors">Pharmacy</Link></li>
-              <li><Link to="/laboratory" className="text-muted-foreground hover:text-primary transition-colors">Laboratory</Link></li>
-              <li><Link to="/emergency" className="text-muted-foreground hover:text-primary transition-colors">Emergency Care</Link></li>
-              <li><Link to="/patient-dashboard" className="text-muted-foreground hover:text-primary transition-colors">Patient Portal</Link></li>
+              <li><Link to="/pharmacy" className="text-muted-foreground hover:text-primary transition-colors">{t('pharmacy')}</Link></li>
+              <li><Link to="/laboratory" className="text-muted-foreground hover:text-primary transition-colors">{t('laboratory')}</Link></li>
+              <li><Link to="/emergency" className="text-muted-foreground hover:text-primary transition-colors">{t('emergencyCare')}</Link></li>
+              <li><Link to="/patient-dashboard" className="text-muted-foreground hover:text-primary transition-colors">{t('patientPortal')}</Link></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold mb-4">Contact Us</h3>
+            <h3 className="font-semibold mb-4">{t('contactUs')}</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <MapPin className="h-5 w-5 text-primary flex-shrink-0" />
@@ -80,7 +83,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>© 2024 SmartCare Hospital. All rights reserved. | Built with care and technology</p>
+          <p>{t('allRightsReserved')}</p>
         </div>
       </div>
     </footer>

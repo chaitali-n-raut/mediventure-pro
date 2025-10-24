@@ -30,9 +30,7 @@ const About = () => {
             <CardContent className="pt-6">
               <h2 className="text-2xl font-bold mb-4 text-primary">{t('ourVision')}</h2>
               <p className="text-muted-foreground">
-                To be the leading healthcare provider in the region, recognized for excellence 
-                in patient care, medical innovation, and compassionate service. We envision a 
-                future where quality healthcare is accessible to all.
+                {t('visionText')}
               </p>
             </CardContent>
           </Card>
@@ -41,9 +39,7 @@ const About = () => {
             <CardContent className="pt-6">
               <h2 className="text-2xl font-bold mb-4 text-primary">{t('ourMission')}</h2>
               <p className="text-muted-foreground">
-                To provide comprehensive, patient-centered healthcare services with integrity, 
-                respect, and excellence. We are committed to improving the health and well-being 
-                of our community through advanced medical care and continuous innovation.
+                {t('missionText')}
               </p>
             </CardContent>
           </Card>
@@ -79,24 +75,17 @@ const About = () => {
           <div>
             <h2 className="text-3xl font-bold mb-4">{t('directorsMessage')}</h2>
             <p className="text-muted-foreground mb-4">
-              Welcome to SmartCare Hospital. For over two decades, we have been at the forefront 
-              of healthcare excellence, combining advanced medical technology with compassionate, 
-              patient-centered care.
+              {t('directorWelcome')}
             </p>
             <p className="text-muted-foreground mb-4">
-              Our team of highly skilled medical professionals is dedicated to providing the 
-              highest standard of care across all our specialized departments. We believe in 
-              treating not just the illness, but the whole person, ensuring that each patient 
-              receives personalized attention and comprehensive care.
+              {t('directorText1')}
             </p>
             <p className="text-muted-foreground mb-4">
-              As we continue to grow and evolve, our commitment remains unchanged: to be your 
-              trusted partner in health, providing world-class medical services with warmth 
-              and compassion.
+              {t('directorText2')}
             </p>
             <p className="font-semibold">
-              Dr. James Anderson<br />
-              <span className="text-sm text-muted-foreground">Medical Director</span>
+              {t('drJamesAnderson')}<br />
+              <span className="text-sm text-muted-foreground">{t('medicalDirector')}</span>
             </p>
           </div>
         </div>
@@ -109,25 +98,25 @@ const About = () => {
               <div className="bg-card w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
                 <Award className="h-12 w-12 text-primary" />
               </div>
-              <p className="text-sm font-medium">ISO 9001:2015 Certified</p>
+              <p className="text-sm font-medium">{t('isoCertified')}</p>
             </div>
             <div>
               <div className="bg-card w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
                 <Award className="h-12 w-12 text-primary" />
               </div>
-              <p className="text-sm font-medium">NABH Accredited</p>
+              <p className="text-sm font-medium">{t('nabhAccredited')}</p>
             </div>
             <div>
               <div className="bg-card w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
                 <Award className="h-12 w-12 text-primary" />
               </div>
-              <p className="text-sm font-medium">JCI Accredited</p>
+              <p className="text-sm font-medium">{t('jciAccredited')}</p>
             </div>
             <div>
               <div className="bg-card w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md">
                 <Award className="h-12 w-12 text-primary" />
               </div>
-              <p className="text-sm font-medium">Green Hospital</p>
+              <p className="text-sm font-medium">{t('greenHospital')}</p>
             </div>
           </div>
         </div>

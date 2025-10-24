@@ -2,8 +2,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Upload } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Pharmacy = () => {
+  const { t } = useLanguage();
   const medicines = [
     { name: "Paracetamol 500mg", price: "$5.00", stock: "In Stock" },
     { name: "Amoxicillin 250mg", price: "$12.00", stock: "In Stock" },
@@ -15,8 +17,8 @@ const Pharmacy = () => {
     <div className="min-h-screen py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Pharmacy</h1>
-          <p className="text-muted-foreground">Order medicines and healthcare products</p>
+          <h1 className="text-4xl font-bold mb-4">{t('pharmacyTitle')}</h1>
+          <p className="text-muted-foreground">{t('orderMedicinesDesc')}</p>
         </div>
 
         <Card className="mb-6">

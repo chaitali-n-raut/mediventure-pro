@@ -2,10 +2,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TestTube, Download, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Laboratory = () => {
+  const { t } = useLanguage();
+  
   const tests = [
-    { name: "Complete Blood Count (CBC)", price: "$45", duration: "4-6 hours" },
+    { name: t('completeCBC'), price: "$45", duration: "4-6 " + t('hours') },
     { name: "Lipid Profile", price: "$55", duration: "6-8 hours" },
     { name: "Thyroid Function Test", price: "$65", duration: "24 hours" },
     { name: "Blood Sugar Test", price: "$25", duration: "2-3 hours" },
