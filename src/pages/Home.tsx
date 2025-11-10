@@ -50,18 +50,18 @@ const Home = () => {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      text: "Excellent care and attention from the medical staff. The facilities are modern and clean.",
+      name: t('testimonial1Name'),
+      text: t('testimonial1Text'),
       rating: 5
     },
     {
-      name: "Michael Chen",
-      text: "Quick appointment scheduling and professional doctors. Highly recommend SmartCare!",
+      name: t('testimonial2Name'),
+      text: t('testimonial2Text'),
       rating: 5
     },
     {
-      name: "Emily Davis",
-      text: "The emergency department was incredibly efficient. They saved my life!",
+      name: t('testimonial3Name'),
+      text: t('testimonial3Text'),
       rating: 5
     }
   ];

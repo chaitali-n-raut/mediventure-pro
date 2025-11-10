@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 
 const Auth = () => {
   const navigate = useNavigate();
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, userRole, user } = useAuth();
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
 
@@ -34,26 +34,22 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
     const { error } = await signIn(loginEmail, loginPassword);
+    setLoading(false);
     if (!error) {
       toast.success(t('loginSuccess'));
-      navigate('/');
-    } else {
-      toast.error(error.message || 'Login failed');
+      // Navigation will be handled by useEffect based on userRole
     }
-    setLoading(false);
   };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const { error } = await signUp(signupEmail, signupPassword, fullName, phone);
+    setLoading(false);
     if (!error) {
       toast.success(t('signupSuccess'));
-      navigate('/');
-    } else {
-      toast.error(error.message || 'Signup failed');
+      // Navigation will be handled by useEffect based on userRole
     }
-    setLoading(false);
   };
 
   const handleDoctorSignup = async (e: React.FormEvent) => {
@@ -67,14 +63,25 @@ const Auth = () => {
       'doctor',
       { specialization, licenseNumber, avatarUrl }
     );
+    setLoading(false);
     if (!error) {
       toast.success(t('signupSuccess'));
-      navigate('/doctor-dashboard');
-    } else {
-      toast.error(error.message || 'Signup failed');
+      // Navigation will be handled by useEffect based on userRole
     }
-    setLoading(false);
   };
+
+  // Navigate based on user role after login/signup
+  useEffect(() => {
+    if (user && userRole) {
+      if (userRole === 'doctor') {
+        navigate('/doctor-dashboard');
+      } else if (userRole === 'patient') {
+        navigate('/patient-dashboard');
+      } else if (userRole === 'staff') {
+        navigate('/admin-dashboard');
+      }
+    }
+  }, [user, userRole, navigate]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-accent/10 p-4">

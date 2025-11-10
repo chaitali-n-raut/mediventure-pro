@@ -34,7 +34,7 @@ const Emergency = () => {
 
         {/* Emergency Contacts */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">24/7 Emergency Contacts</h2>
+          <h2 className="text-3xl font-bold mb-6">{t('emergencyContacts247')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {emergencyContacts.map((contact, index) => (
               <Card key={index} className="border-2 border-primary hover:shadow-lg transition-shadow">
@@ -59,19 +59,19 @@ const Emergency = () => {
         {/* Call Ambulance Button */}
         <div className="bg-primary text-primary-foreground rounded-lg p-8 text-center mb-12">
           <Ambulance className="h-16 w-16 mx-auto mb-4" />
-          <h3 className="text-2xl font-bold mb-4">Need an Ambulance?</h3>
-          <p className="mb-6 opacity-90">Our rapid response team is ready to assist you 24/7</p>
+          <h3 className="text-2xl font-bold mb-4">{t('needAmbulance')}</h3>
+          <p className="mb-6 opacity-90">{t('rapidResponseTeam')}</p>
           <a href="tel:+1234567911">
             <Button size="lg" variant="secondary" className="text-lg">
               <Phone className="mr-2 h-5 w-5" />
-              Call Ambulance Now
+              {t('callAmbulanceNow')}
             </Button>
           </a>
         </div>
 
         {/* Nearby Hospitals */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">Nearby Hospitals & Blood Banks</h2>
+          <h2 className="text-3xl font-bold mb-6">{t('nearbyHospitals')}</h2>
           <div className="space-y-4">
             {nearbyHospitals.map((hospital, index) => (
               <Card key={index} className="border border-border">
@@ -83,13 +83,13 @@ const Emergency = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold mb-1">{hospital.name}</h3>
-                        <p className="text-sm text-muted-foreground">{hospital.distance} away</p>
+                        <p className="text-sm text-muted-foreground">{hospital.distance} {t('away')}</p>
                       </div>
                     </div>
                     <a href={`tel:${hospital.phone}`}>
                       <Button variant="outline" size="sm">
                         <Phone className="mr-2 h-4 w-4" />
-                        Call
+                        {t('call')}
                       </Button>
                     </a>
                   </div>
@@ -102,27 +102,27 @@ const Emergency = () => {
         {/* Emergency Tips */}
         <Card className="bg-secondary/30 border-none">
           <CardContent className="pt-6">
-            <h3 className="text-xl font-bold mb-4">Emergency Tips</h3>
+            <h3 className="text-xl font-bold mb-4">{t('emergencyTips')}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
-                <span>Stay calm and call emergency services immediately</span>
+                <span>{t('tip1')}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
-                <span>Provide clear location and nature of emergency</span>
+                <span>{t('tip2')}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
-                <span>Don't move the patient unless absolutely necessary</span>
+                <span>{t('tip3')}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
-                <span>Keep important medical information and medications ready</span>
+                <span>{t('tip4')}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary font-bold">•</span>
-                <span>If possible, have someone meet the ambulance at the entrance</span>
+                <span>{t('tip5')}</span>
               </li>
             </ul>
           </CardContent>

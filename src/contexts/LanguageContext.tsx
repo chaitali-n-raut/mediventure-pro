@@ -119,15 +119,35 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // Emergency Page
     emergencyServices: { en: 'Emergency Services', hi: 'आपातकालीन सेवाएं', mr: 'आणीबाणी सेवा' },
     emergencyAlert: { en: 'In case of medical emergency, call immediately or visit our emergency department', hi: 'चिकित्सा आपातकाल की स्थिति में, तुरंत कॉल करें या हमारे आपातकालीन विभाग पर जाएं', mr: 'वैद्यकीय आणीबाणीच्या बाबतीत, त्वरित कॉल करा किंवा आमच्या आणीबाणी विभागाला भेट द्या' },
+    inCaseOfEmergency: { en: 'In case of medical emergency, call us immediately', hi: 'चिकित्सा आपातकाल की स्थिति में, तुरंत हमें कॉल करें', mr: 'वैद्यकीय आणीबाणीच्या बाबतीत, तात्काळ आम्हाला कॉल करा' },
+    emergencyContacts247: { en: '24/7 Emergency Contacts', hi: '24/7 आपातकालीन संपर्क', mr: '24/7 आणीबाणी संपर्क' },
     emergencyContacts: { en: '24/7 Emergency Contacts', hi: '24/7 आपातकालीन संपर्क', mr: '24/7 आणीबाणी संपर्क' },
     emergencyHotline: { en: 'Emergency Hotline', hi: 'आपातकालीन हॉटलाइन', mr: 'आणीबाणी हॉटलाइन' },
+    emergencyCareDesc: { en: '24/7 Emergency Care', hi: '24/7 आपातकालीन देखभाल', mr: '24/7 आणीबाणी काळजी' },
     ambulanceService: { en: 'Ambulance Service', hi: 'एम्बुलेंस सेवा', mr: 'रुग्णवाहिका सेवा' },
+    quickResponseTeam: { en: 'Quick Response Team', hi: 'त्वरित प्रतिक्रिया टीम', mr: 'जलद प्रतिसाद टीम' },
     traumaCenter: { en: 'Trauma Center', hi: 'ट्रॉमा सेंटर', mr: 'ट्रॉमा सेंटर' },
+    criticalCareUnit: { en: 'Critical Care Unit', hi: 'गंभीर देखभाल इकाई', mr: 'गंभीर काळजी युनिट' },
     needAmbulance: { en: 'Need an Ambulance?', hi: 'एम्बुलेंस चाहिए?', mr: 'रुग्णवाहिका हवी आहे?' },
+    rapidResponseTeam: { en: 'Our rapid response team is ready to assist you 24/7', hi: 'हमारी त्वरित प्रतिक्रिया टीम 24/7 आपकी सहायता के लिए तैयार है', mr: 'आमची जलद प्रतिसाद टीम 24/7 तुम्हाला मदत करण्यासाठी तयार आहे' },
     rapidResponse: { en: 'Our rapid response team is ready to assist you 24/7', hi: 'हमारी त्वरित प्रतिक्रिया टीम 24/7 आपकी सहायता के लिए तैयार है', mr: 'आमची जलद प्रतिसाद टीम 24/7 तुम्हाला मदत करण्यासाठी तयार आहे' },
     callAmbulanceNow: { en: 'Call Ambulance Now', hi: 'अभी एम्बुलेंस कॉल करें', mr: 'आता रुग्णवाहिका कॉल करा' },
     nearbyHospitals: { en: 'Nearby Hospitals & Blood Banks', hi: 'पास के अस्पताल और रक्त बैंक', mr: 'जवळपासची रुग्णालये आणि रक्त बँका' },
+    away: { en: 'away', hi: 'दूर', mr: 'दूर' },
     emergencyTips: { en: 'Emergency Tips', hi: 'आपातकालीन सुझाव', mr: 'आणीबाणी टिप्स' },
+    tip1: { en: 'Stay calm and call emergency services immediately', hi: 'शांत रहें और तुरंत आपातकालीन सेवाओं को कॉल करें', mr: 'शांत रहा आणि तात्काळ आणीबाणी सेवांना कॉल करा' },
+    tip2: { en: 'Provide clear location and nature of emergency', hi: 'स्पष्ट स्थान और आपातकाल की प्रकृति प्रदान करें', mr: 'स्पष्ट स्थान आणि आणीबाणीचे स्वरूप प्रदान करा' },
+    tip3: { en: "Don't move the patient unless absolutely necessary", hi: 'अत्यावश्यक न हो तो मरीज को न हिलाएं', mr: 'अत्यंत आवश्यक असल्याशिवाय रुग्णाला हलवू नका' },
+    tip4: { en: 'Keep important medical information and medications ready', hi: 'महत्वपूर्ण चिकित्सा जानकारी और दवाएं तैयार रखें', mr: 'महत्त्वाची वैद्यकीय माहिती आणि औषधे तयार ठेवा' },
+    tip5: { en: 'If possible, have someone meet the ambulance at the entrance', hi: 'यदि संभव हो, तो किसी को एम्बुलेंस से प्रवेश द्वार पर मिलने दें', mr: 'शक्य असल्यास, प्रवेशद्वाराजवळ कोणीतरी रुग्णवाहिकेला भेटावे' },
+    
+    // Testimonials
+    testimonial1Name: { en: 'Sarah Johnson', hi: 'सारा जॉनसन', mr: 'सारा जॉन्सन' },
+    testimonial1Text: { en: 'Excellent care and attention from the medical staff. The facilities are modern and clean.', hi: 'चिकित्सा कर्मचारियों से उत्कृष्ट देखभाल और ध्यान। सुविधाएं आधुनिक और स्वच्छ हैं।', mr: 'वैद्यकीय कर्मचार्‍यांकडून उत्कृष्ट काळजी आणि लक्ष. सुविधा आधुनिक आणि स्वच्छ आहेत.' },
+    testimonial2Name: { en: 'Michael Chen', hi: 'माइकल चेन', mr: 'मायकेल चेन' },
+    testimonial2Text: { en: 'Quick appointment scheduling and professional doctors. Highly recommend SmartCare!', hi: 'त्वरित अपॉइंटमेंट शेड्यूलिंग और पेशेवर डॉक्टर। स्मार्टकेयर की अत्यधिक अनुशंसा करते हैं!', mr: 'जलद भेट नियोजन आणि व्यावसायिक डॉक्टर. स्मार्टकेअरची शिफारस करतो!' },
+    testimonial3Name: { en: 'Emily Davis', hi: 'एमिली डेविस', mr: 'एमिली डेव्हिस' },
+    testimonial3Text: { en: 'The emergency department was incredibly efficient. They saved my life!', hi: 'आपातकालीन विभाग अविश्वसनीय रूप से कुशल था। उन्होंने मेरी जान बचाई!', mr: 'आणीबाणी विभाग आश्चर्यकारकपणे कार्यक्षम होता. त्यांनी माझा जीव वाचवला!' },
     
     // Laboratory Page
     laboratoryServices: { en: 'Laboratory Services', hi: 'प्रयोगशाला सेवाएं', mr: 'प्रयोगशाळा सेवा' },
@@ -256,18 +276,6 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     subjectPlaceholder: { en: 'How can we help you?', hi: 'हम आपकी कैसे मदद कर सकते हैं?', mr: 'आम्ही तुम्हाला कशी मदत करू शकतो?' },
     messagePlaceholder: { en: 'Tell us more about your inquiry...', hi: 'अपनी पूछताछ के बारे में अधिक बताएं...', mr: 'तुमच्या चौकशीबद्दल अधिक सांगा...' },
     mapLocation: { en: 'Map Location', hi: 'मानचित्र स्थान', mr: 'नकाशा स्थान' },
-    
-    // Emergency Page
-    inCaseOfEmergency: { en: 'In case of medical emergency, call immediately or visit our emergency department', hi: 'चिकित्सा आपातकाल की स्थिति में, तुरंत कॉल करें या हमारे आपातकालीन विभाग पर जाएं', mr: 'वैद्यकीय आणीबाणीच्या बाबतीत, त्वरित कॉल करा किंवा आमच्या आणीबाणी विभागाला भेट द्या' },
-    emergencyCareDesc: { en: '24/7 Emergency Care', hi: '24/7 आपातकालीन देखभाल', mr: '24/7 आणीबाणी सेवा' },
-    quickResponseTeam: { en: 'Quick Response Team', hi: 'त्वरित प्रतिक्रिया टीम', mr: 'जलद प्रतिसाद टीम' },
-    criticalCareUnit: { en: 'Critical Care Unit', hi: 'गहन चिकित्सा इकाई', mr: 'गंभीर काळजी युनिट' },
-    kmAway: { en: 'away', hi: 'दूर', mr: 'दूर' },
-    stayCalm: { en: 'Stay calm and call emergency services immediately', hi: 'शांत रहें और तुरंत आपातकालीन सेवाओं को कॉल करें', mr: 'शांत रहा आणि त्वरित आणीबाणी सेवांना कॉल करा' },
-    provideLocation: { en: 'Provide clear location and nature of emergency', hi: 'स्पष्ट स्थान और आपातकाल की प्रकृति प्रदान करें', mr: 'स्पष्ट स्थान आणि आणीबाणीचे स्वरूप प्रदान करा' },
-    dontMovePatient: { en: 'Don\'t move the patient unless absolutely necessary', hi: 'रोगी को तब तक न हिलाएं जब तक बिल्कुल आवश्यक न हो', mr: 'रुग्णाला पूर्णपणे आवश्यक असल्याशिवाय हलवू नका' },
-    keepMedicalInfo: { en: 'Keep important medical information and medications ready', hi: 'महत्वपूर्ण चिकित्सा जानकारी और दवाएं तैयार रखें', mr: 'महत्त्वाची वैद्यकीय माहिती आणि औषधे तयार ठेवा' },
-    meetAmbulance: { en: 'If possible, have someone meet the ambulance at the entrance', hi: 'यदि संभव हो, तो किसी को प्रवेश द्वार पर एम्बुलेंस से मिलवाएं', mr: 'शक्य असल्यास, कोणीतरी प्रवेशद्वारावर रुग्णवाहिकेला भेटावे' },
     
     // Laboratory Page  
     advancedDiagnosticTests: { en: 'Advanced diagnostic tests with quick results', hi: 'त्वरित परिणामों के साथ उन्नत नैदानिक परीक्षण', mr: 'जलद परिणामांसह प्रगत निदान चाचण्या' },
